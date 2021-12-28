@@ -1,6 +1,4 @@
 import Head from "next/head";
-import { useEffect } from "react";
-import AOS from "aos";
 import "../styles/utilities.css";
 import "../styles/homepage.css";
 import "../styles/detail.css";
@@ -16,10 +14,9 @@ import "../styles/overview.css";
 import "../styles/transactions.css";
 import "../styles/transactions-detail.css";
 import "../styles/edit-profile.css";
+import "../styles/navbar-log-in.css";
 
 function MyApp({ Component, pageProps }) {
-  useEffect(() => AOS.init(), []);
-
   return (
     <>
       <Head>
@@ -46,7 +43,7 @@ function MyApp({ Component, pageProps }) {
           src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
           crossOrigin="anonymous"
-        ></script>
+        />
       </Head>
       <Component {...pageProps} />;
     </>

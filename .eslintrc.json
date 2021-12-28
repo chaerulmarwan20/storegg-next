@@ -8,7 +8,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 13,
+    "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "plugins": ["react"],
@@ -28,6 +28,9 @@
     "react/function-component-definition": "off",
     "arrow-body-style": "off",
     "linebreak-style": "off",
-    "jsx-a11y/label-has-associated-control": "off"
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/no-typos": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "object-curly-newline": "off"
   }
 }

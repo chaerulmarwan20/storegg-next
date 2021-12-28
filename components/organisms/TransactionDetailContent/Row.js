@@ -16,7 +16,7 @@ Row.defaultProps = {
 
 Row.propTypes = {
   label: propTypes.string.isRequired,
-  value: propTypes.oneOfType(propTypes.string, propTypes.number).isRequired,
+  value: propTypes.oneOfType([propTypes.string, propTypes.number]).isRequired,
   className: propTypes.string,
 };
 

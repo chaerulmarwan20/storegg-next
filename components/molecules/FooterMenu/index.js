@@ -37,7 +37,12 @@ const FooterMenu = (props) => {
 
 FooterMenu.propTypes = {
   title: propTypes.string.isRequired,
-  menu: propTypes.arrayOf(propTypes.object).isRequired,
+  menu: propTypes.arrayOf(
+    propTypes.shape({
+      title: propTypes.string.isRequired,
+      href: propTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default FooterMenu;

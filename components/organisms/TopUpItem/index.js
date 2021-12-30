@@ -2,17 +2,18 @@ import Image from "next/image";
 import propTypes from "prop-types";
 
 const TopUpItem = (props) => {
-  const { type } = props;
+  const { type, data } = props;
+  const apiImg = process.env.NEXT_PUBLIC_IMG;
 
   if (type === "desktop") {
     return (
       <div className="pb-50 d-md-block d-none">
         <h2 className="text-4xl fw-bold color-palette-1 text-start mb-10 mt-10">
-          Mobile Legends:
-          <br />
-          The New Battle 2021
+          {data.name}
         </h2>
-        <p className="text-lg color-palette-2 mb-0">Category: Mobile</p>
+        <p className="text-lg color-palette-2 mb-0">
+          Category: {data.category.name}
+        </p>
       </div>
     );
   }
@@ -21,7 +22,7 @@ const TopUpItem = (props) => {
     <div className="row align-items-center">
       <div className="col-md-12 col-4">
         <Image
-          src="/img/Thumbnail-3.png"
+          src={`${apiImg}/${data.thumbnail}`}
           width={280}
           height={380}
           className="img-fluid"
@@ -30,12 +31,10 @@ const TopUpItem = (props) => {
       </div>
       <div className="col-md-12 col-8 d-md-none d-block">
         <h2 className="text-xl fw-bold color-palette-1 text-start mb-10">
-          Mobile Legends:
-          <br />
-          The New Battle 2021
+          {data.name}
         </h2>
         <p className="text-sm color-palette-2 text-start mb-0">
-          Category: Mobile
+          Category: {data.category.name}
         </p>
       </div>
     </div>
@@ -44,6 +43,13 @@ const TopUpItem = (props) => {
 
 TopUpItem.propTypes = {
   type: propTypes.oneOf(["mobile", "desktop"]).isRequired,
+  data: propTypes.shape({
+    name: propTypes.string.isRequired,
+    thumbnail: propTypes.string.isRequired,
+    category: propTypes.shape({
+      name: propTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default TopUpItem;

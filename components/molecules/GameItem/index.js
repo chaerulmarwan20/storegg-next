@@ -3,11 +3,11 @@ import Image from "next/image";
 import propTypes from "prop-types";
 
 const GameItem = (props) => {
-  const { thumbnail, title, category } = props;
+  const { id, thumbnail, title, category } = props;
 
   return (
     <div className="featured-game-card position-relative">
-      <Link href="/detail">
+      <Link href={`/detail/${id}`}>
         <a>
           <div className="blur-sharp">
             <Image
@@ -41,13 +41,8 @@ const GameItem = (props) => {
 };
 
 GameItem.propTypes = {
-  thumbnail: propTypes.oneOf([
-    "/img/Thumbnail-1.png",
-    "/img/Thumbnail-2.png",
-    "/img/Thumbnail-3.png",
-    "/img/Thumbnail-4.png",
-    "/img/Thumbnail-5.png",
-  ]).isRequired,
+  id: propTypes.string.isRequired,
+  thumbnail: propTypes.string.isRequired,
   title: propTypes.string.isRequired,
   category: propTypes.string.isRequired,
 };

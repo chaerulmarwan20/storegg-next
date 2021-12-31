@@ -1,12 +1,40 @@
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { toast } from "react-toastify";
 import propTypes from "prop-types";
 import NominalItem from "./NominalItem";
 import PaymentItem from "./PaymentItem";
 
 const TopUpForm = (props) => {
   const { nominals, payments } = props;
+  const router = useRouter();
+  const [verifyId, setVerifyId] = useState("");
+  const [bankAccountName, setBankAccountName] = useState("");
+  const [nominalItem, setNominalItem] = useState({});
+  const [paymentItem, setPaymentItem] = useState({});
+
+  const onSubmit = () => {
+    if (
+      verifyId === "" ||
+      bankAccountName === "" ||
+      nominalItem === {} ||
+      paymentItem === {}
+    ) {
+      toast.error("Please fill in all data!!!");
+    } else {
+      const data = {
+        verifyId,
+        bankAccountName,
+        nominalItem,
+        paymentItem,
+      };
+      localStorage.setItem("data-topup", JSON.stringify(data));
+      router.push("/checkout");
+    }
+  };
 
   return (
-    <form action="./checkout.html" method="POST">
+    <form>
       <div className="pt-md-50 pt-30">
         <div>
           <label
@@ -22,6 +50,8 @@ const TopUpForm = (props) => {
             name="ID"
             aria-describedby="verifyID"
             placeholder="Enter your ID"
+            value={verifyId}
+            onChange={(e) => setVerifyId(e.target.value)}
           />
         </div>
       </div>
@@ -38,6 +68,7 @@ const TopUpForm = (props) => {
                 coinQuantity={nominal.coinQuantity}
                 coinName={nominal.coinName}
                 price={nominal.price}
+                onChange={() => setNominalItem(nominal)}
               />
             );
           })}
@@ -58,6 +89,7 @@ const TopUpForm = (props) => {
                     bankId={bank._id}
                     type={payment.type}
                     name={bank.bankName}
+                    onChange={() => setPaymentItem({ payment, bank })}
                   />
                 );
               });
@@ -80,16 +112,18 @@ const TopUpForm = (props) => {
           name="bankAccount"
           aria-describedby="bankAccount"
           placeholder="Enter your Bank Account Name"
+          value={bankAccountName}
+          onChange={(e) => setBankAccountName(e.target.value)}
         />
       </div>
       <div className="d-sm-block d-flex flex-column w-100">
-        <a
-          href="/checkout"
-          type="submit"
+        <button
+          type="button"
           className="btn btn-submit rounded-pill fw-medium text-white border-0 text-lg"
+          onClick={onSubmit}
         >
           Continue
-        </a>
+        </button>
       </div>
     </form>
   );

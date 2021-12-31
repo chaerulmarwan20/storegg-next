@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState, useCallback, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { getGameCategory } from "../services/player";
 import { setSignUp } from "../services/auth";
 
@@ -28,7 +28,7 @@ const SignUpPhoto = () => {
     const form = JSON.parse(getLocalForm);
     const data = new FormData();
 
-    data.append("image", image);
+    if (image) data.append("image", image);
     data.append("email", form.email);
     data.append("name", form.name);
     data.append("password", form.password);
@@ -57,10 +57,10 @@ const SignUpPhoto = () => {
   return (
     <section className="sign-up-photo mx-auto pt-lg-227 pb-lg-227 pt-130 pb-50">
       <div className="container mx-auto">
-        <form action="">
+        <form>
           <div className="form-input d-md-block d-flex flex-column">
             <div>
-              <div className="mb-20">
+              <div className="mb-20 d-none">
                 <div className="image-upload text-center">
                   <label htmlFor="avatar">
                     <Image
@@ -132,7 +132,6 @@ const SignUpPhoto = () => {
           </div>
         </form>
       </div>
-      <ToastContainer />
     </section>
   );
 };

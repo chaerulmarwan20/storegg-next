@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 import { setLogin } from "../../../services/auth";
 
 const SignInForm = () => {
@@ -20,6 +21,9 @@ const SignInForm = () => {
       if (response.error) toast.error(response.message);
       else {
         toast.success("Login successful");
+        const { token } = response.data;
+        const tokenBase64 = btoa(token);
+        Cookies.set("token", tokenBase64, { expires: 1 });
         router.push("/");
       }
     }
@@ -81,7 +85,6 @@ const SignInForm = () => {
           </a>
         </Link>
       </div>
-      <ToastContainer />
     </>
   );
 };

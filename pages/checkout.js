@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import jwtDecode from "jwt-decode";
 import CheckoutItem from "../components/organisms/CheckoutItem";
 import CheckoutDetail from "../components/organisms/CheckoutDetail";
 import CheckoutConfirmation from "../components/organisms/CheckoutConfirmation";
@@ -31,3 +32,24 @@ const Checkout = () => {
 };
 
 export default Checkout;
+
+export async function getServerSideProps({ req }) {
+  const { token } = req.cookies;
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/sign-in",
+        permanent: false,
+      },
+    };
+  }
+  const jwtToken = Buffer.from(token, "base64").toString("ascii");
+  const payload = jwtDecode(jwtToken);
+  const { player } = payload;
+  player.avatar = player.avatar ? player.avatar : "/img/default.png";
+  return {
+    props: {
+      user: player,
+    },
+  };
+}

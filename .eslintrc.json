@@ -33,6 +33,9 @@
     "jsx-a11y/anchor-is-valid": "off",
     "object-curly-newline": "off",
     "no-underscore-dangle": "off",
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "operator-linebreak": "off"
   }
 }

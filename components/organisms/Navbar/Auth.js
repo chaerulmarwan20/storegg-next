@@ -1,9 +1,35 @@
 import Image from "next/image";
 import Link from "next/link";
-import propTypes from "prop-types";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
 
-const Auth = (props) => {
-  const { isLogin } = props;
+const Auth = () => {
+  const router = useRouter();
+  const [isLogin, setIsLogin] = useState(false);
+  const [user, setUser] = useState({
+    avatar: "",
+    name: "",
+  });
+
+  const onLogout = () => {
+    Cookies.remove("token");
+    router.push("/");
+    setIsLogin(false);
+  };
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      const jwtToken = atob(token);
+      const payload = jwtDecode(jwtToken);
+      const { player } = payload;
+      player.avatar = player.avatar ? player.avatar : "/img/default.png";
+      setIsLogin(true);
+      setUser(player);
+    }
+  }, []);
 
   if (isLogin) {
     return (
@@ -18,11 +44,11 @@ const Auth = (props) => {
               aria-expanded="false"
             >
               <Image
-                src="/img/avatar-1.png"
+                src={user.avatar}
                 className="rounded-circle"
                 width={40}
                 height={40}
-                alt="Avatar"
+                alt={user.name}
               />
             </a>
           </Link>
@@ -50,9 +76,13 @@ const Auth = (props) => {
               </Link>
             </li>
             <li>
-              <Link href="/sign-in">
-                <a className="dropdown-item text-lg color-palette-2">Log Out</a>
-              </Link>
+              <button
+                type="button"
+                onClick={onLogout}
+                className="dropdown-item text-lg color-palette-2"
+              >
+                Log Out
+              </button>
             </li>
           </ul>
         </div>
@@ -69,14 +99,6 @@ const Auth = (props) => {
       </Link>
     </li>
   );
-};
-
-Auth.defaultProps = {
-  isLogin: false,
-};
-
-Auth.propTypes = {
-  isLogin: propTypes.bool,
 };
 
 export default Auth;

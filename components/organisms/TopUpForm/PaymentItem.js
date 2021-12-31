@@ -2,12 +2,13 @@ import propTypes from "prop-types";
 import IconCheck from "./IconCheck";
 
 const PaymentItem = (props) => {
-  const { bankId, type, name } = props;
+  const { bankId, type, name, onChange } = props;
 
   return (
     <label
       className="col-lg-4 col-sm-6 ps-md-15 pe-md-15 pt-md-15 pb-md-15 pt-10 pb-10"
       htmlFor={bankId}
+      onChange={onChange}
     >
       <input
         className="d-none"
@@ -31,6 +32,7 @@ PaymentItem.propTypes = {
   bankId: propTypes.string.isRequired,
   type: propTypes.string.isRequired,
   name: propTypes.string.isRequired,
+  onChange: propTypes.func.isRequired,
 };
 
 export default PaymentItem;

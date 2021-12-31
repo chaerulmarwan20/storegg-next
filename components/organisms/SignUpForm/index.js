@@ -1,6 +1,29 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import cx from "classnames";
 
 const SignUpForm = () => {
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const className = {
+    label: cx("form-label text-lg fw-medium color-palette-1 mb-10"),
+    input: cx("form-control rounded-pill text-lg"),
+  };
+
+  const onSubmit = () => {
+    const userForm = {
+      name,
+      email,
+      password,
+    };
+    localStorage.setItem("user-form", JSON.stringify(userForm));
+    router.push("/sign-up-photo");
+  };
+
   return (
     <>
       <h2 className="text-4xl fw-bold color-palette-1 mb-10">Sign Up</h2>
@@ -8,60 +31,58 @@ const SignUpForm = () => {
         Daftar dan bergabung dengan kami
       </p>
       <div className="pt-50">
-        <label
-          htmlFor="name"
-          className="form-label text-lg fw-medium color-palette-1 mb-10"
-        >
+        <label htmlFor="name" className={className.label}>
           Full Name
         </label>
         <input
           type="text"
-          className="form-control rounded-pill text-lg"
+          className={className.input}
           id="name"
           name="name"
           aria-describedby="name"
           placeholder="Enter your name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div className="pt-30">
-        <label
-          htmlFor="email"
-          className="form-label text-lg fw-medium color-palette-1 mb-10"
-        >
+        <label htmlFor="email" className={className.label}>
           Email Address
         </label>
         <input
           type="email"
-          className="form-control rounded-pill text-lg"
+          className={className.input}
           id="email"
           name="email"
           aria-describedby="email"
           placeholder="Enter your email address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div className="pt-30">
-        <label
-          htmlFor="password"
-          className="form-label text-lg fw-medium color-palette-1 mb-10"
-        >
+        <label htmlFor="password" className={className.label}>
           Password
         </label>
         <input
           type="password"
-          className="form-control rounded-pill text-lg"
+          className={className.input}
           id="password"
           name="password"
           aria-describedby="password"
-          placeholder="Your password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
       <div className="button-group d-flex flex-column mx-auto pt-50">
-        <a
+        <button
+          type="button"
           className="btn btn-sign-up fw-medium text-lg text-white rounded-pill mb-16"
-          href="/sign-up-photo"
+          onClick={onSubmit}
         >
           Continue
-        </a>
+        </button>
         <Link href="/sign-in">
           <a className="btn btn-sign-in fw-medium text-lg color-palette-1 rounded-pill">
             Sign In

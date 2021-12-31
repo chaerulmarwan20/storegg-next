@@ -20,3 +20,12 @@ export const getDetailVoucher = async (id) => {
 
   return data;
 };
+
+export const getGameCategory = async () => {
+  const endpoint = "players/category";
+
+  const response = await axios.get(`${api}/${version}/${endpoint}`);
+  const { data } = response.data;
+
+  return data;
+};

@@ -19,12 +19,15 @@ const Detail = () => {
   const [nominals, setNominals] = useState([]);
   const [payments, setPayments] = useState([]);
 
-  const getVoucherDetail = useCallback(async (id) => {
-    const data = await getDetailVoucher(id);
-    setDataItem(data.detail);
-    setNominals(data.detail.nominals);
-    setPayments(data.payment);
-  }, []);
+  const getVoucherDetail = useCallback(
+    async (id) => {
+      const data = await getDetailVoucher(id);
+      setDataItem(data.detail);
+      setNominals(data.detail.nominals);
+      setPayments(data.payment);
+    },
+    [getDetailVoucher]
+  );
 
   useEffect(() => {
     if (isReady) getVoucherDetail(query.id);

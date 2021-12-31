@@ -41,7 +41,7 @@ FooterMenu.propTypes = {
     propTypes.shape({
       title: propTypes.string.isRequired,
       href: propTypes.string.isRequired,
-    })
+    }).isRequired
   ).isRequired,
 };
 

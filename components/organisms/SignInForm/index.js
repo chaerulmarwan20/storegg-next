@@ -1,6 +1,30 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import { setLogin } from "../../../services/auth";
 
 const SignInForm = () => {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onSubmit = async () => {
+    const data = {
+      email,
+      password,
+    };
+    if (!email || !password) toast.error("Email and Password are required!!!");
+    else {
+      const response = await setLogin(data);
+      if (response.error) toast.error(response.message);
+      else {
+        toast.success("Login successful");
+        router.push("/");
+      }
+    }
+  };
+
   return (
     <>
       <h2 className="text-4xl fw-bold color-palette-1 mb-10">Sign In</h2>
@@ -21,6 +45,8 @@ const SignInForm = () => {
           name="email"
           aria-describedby="email"
           placeholder="Enter your email address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div className="pt-30">
@@ -36,22 +62,26 @@ const SignInForm = () => {
           id="password"
           name="password"
           aria-describedby="password"
-          placeholder="Your password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
       <div className="button-group d-flex flex-column mx-auto pt-50">
-        <a
+        <button
+          type="button"
           className="btn btn-sign-in fw-medium text-lg text-white rounded-pill mb-16"
-          href="/"
+          onClick={onSubmit}
         >
           Continue to Sign In
-        </a>
+        </button>
         <Link href="/sign-up">
           <a className="btn btn-sign-up fw-medium text-lg color-palette-1 rounded-pill">
             Sign Up
           </a>
         </Link>
       </div>
+      <ToastContainer />
     </>
   );
 };

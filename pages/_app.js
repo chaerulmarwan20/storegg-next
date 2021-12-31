@@ -1,4 +1,5 @@
 import Head from "next/head";
+import "react-toastify/dist/ReactToastify.css";
 import "../styles/utilities.css";
 import "../styles/homepage.css";
 import "../styles/detail.css";

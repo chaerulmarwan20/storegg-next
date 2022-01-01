@@ -1,4 +1,5 @@
 import axios from "axios";
+import callApi from "../config/api";
 
 const api = process.env.NEXT_PUBLIC_API;
 const version = "api/v1";
@@ -28,4 +29,14 @@ export const getGameCategory = async () => {
   const { data } = response.data;
 
   return data;
+};
+
+export const setCheckout = (data) => {
+  const url = `${api}/${version}/players/checkout`;
+  return callApi({
+    url,
+    method: "POST",
+    data,
+    token: true,
+  });
 };

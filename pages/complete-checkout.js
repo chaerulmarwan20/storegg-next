@@ -23,11 +23,13 @@ const CompleteCheckout = () => {
               My Dashboard
             </a>
           </Link>
-          <Link href="/">
-            <a className="btn btn-whatsapp fw-medium text-lg color-palette-1 rounded-pill">
-              WhatsApp ke Admin
-            </a>
-          </Link>
+          <a
+            className="btn btn-whatsapp fw-medium text-lg color-palette-1 rounded-pill"
+            href="https://wa.me/6281224685502?text=Saya%20sudah%20melakukan%20pembayaran"
+            role="button"
+          >
+            WhatsApp ke Admin
+          </a>
         </div>
       </div>
     </section>

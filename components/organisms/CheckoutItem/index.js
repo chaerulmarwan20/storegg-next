@@ -1,12 +1,28 @@
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 const CheckoutItem = () => {
+  const urlImg = process.env.NEXT_PUBLIC_IMG;
+  const [dataItem, setDataItem] = useState({
+    thumbnail: "",
+    name: "",
+    category: {
+      name: "",
+    },
+  });
+
+  useEffect(() => {
+    const dataFromLocal = localStorage.getItem("data-item");
+    const dataItemLocal = JSON.parse(dataFromLocal);
+    setDataItem(dataItemLocal);
+  }, []);
+
   return (
     <div className="game-checkout d-flex flex-row align-items-center pt-md-50 pb-md-50 pt-30 pb-30">
       <div className="pe-4">
         <div className="cropped">
           <Image
-            src="/img/Thumbnail-3.png"
+            src={`${urlImg}/${dataItem.thumbnail}`}
             className="img-fluid"
             width={200}
             height={271}
@@ -15,11 +31,10 @@ const CheckoutItem = () => {
         </div>
       </div>
       <div>
-        <p className="fw-bold text-xl color-palette-1 mb-10">
-          Mobile Legends:
-          <br /> The New Battle 2021
+        <p className="fw-bold text-xl color-palette-1 mb-10">{dataItem.name}</p>
+        <p className="color-palette-2 m-0">
+          Category: {dataItem.category.name}
         </p>
-        <p className="color-palette-2 m-0">Category: Mobile</p>
       </div>
     </div>
   );

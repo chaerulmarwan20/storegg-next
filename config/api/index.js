@@ -1,9 +1,23 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
-const callApi = async ({ url, method, data }) => {
-  const response = await axios({ url, method, data }).catch(
-    (err) => err.response
-  );
+const callApi = async ({ url, method, data, token = false }) => {
+  let headers = {};
+  if (token) {
+    const tokenCookies = Cookies.get("token");
+    if (tokenCookies) {
+      const jwtToken = atob(tokenCookies);
+      headers = {
+        Authorization: `Bearer ${jwtToken}`,
+      };
+    }
+  }
+  const response = await axios({
+    url,
+    method,
+    data,
+    headers,
+  }).catch((err) => err.response);
   const res = {};
   if (response.status > 300) {
     res.error = true;

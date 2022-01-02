@@ -25,9 +25,10 @@ const callApi = async ({ url, method, data, token = false }) => {
     res.data = null;
     return res;
   }
+  const { length } = Object.keys(response.data);
   res.error = false;
   res.message = "Success";
-  res.data = response.data.data;
+  res.data = length > 1 ? response.data : response.data.data;
   return res;
 };
 

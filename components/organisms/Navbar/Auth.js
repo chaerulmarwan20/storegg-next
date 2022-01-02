@@ -9,7 +9,7 @@ const Auth = () => {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState({
-    avatar: "",
+    avatar: "/img/default.png",
     name: "",
   });
 

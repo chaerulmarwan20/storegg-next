@@ -1,4 +1,5 @@
 import Image from "next/image";
+import NumberFormat from "react-number-format";
 import propTypes from "prop-types";
 
 const Category = (props) => {
@@ -18,7 +19,15 @@ const Category = (props) => {
         </div>
         <div>
           <p className="text-sm color-palette-2 mb-1">Total Spent</p>
-          <p className="text-2xl color-palette-1 fw-medium m-0">{nominal}</p>
+          <p className="text-2xl color-palette-1 fw-medium m-0">
+            <NumberFormat
+              value={nominal}
+              displayType="text"
+              thousandSeparator="."
+              prefix="Rp. "
+              decimalSeparator=","
+            />
+          </p>
         </div>
       </div>
     </div>

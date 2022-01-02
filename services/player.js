@@ -40,12 +40,3 @@ export const setCheckout = (data) => {
     token: true,
   });
 };
-
-export const getMemberOverview = () => {
-  const url = `${api}/${version}/players/dashboard`;
-  return callApi({
-    url,
-    method: "GET",
-    token: true,
-  });
-};

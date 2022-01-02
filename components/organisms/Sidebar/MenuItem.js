@@ -4,7 +4,7 @@ import propTypes from "prop-types";
 import MenuIcon from "./MenuIcon";
 
 const MenuItem = (props) => {
-  const { title, icon, href, active } = props;
+  const { title, icon, href, active, onClick } = props;
   const classItem = cx({
     item: true,
     "mb-30": true,
@@ -15,9 +15,15 @@ const MenuItem = (props) => {
     <div className={classItem}>
       <MenuIcon icon={icon} />
       <p className="item-title m-0">
-        <Link href={href}>
-          <a className="text-lg text-decoration-none">{title}</a>
-        </Link>
+        {onClick ? (
+          <a href="" className="text-lg text-decoration-none" onClick={onClick}>
+            {title}
+          </a>
+        ) : (
+          <Link href={href}>
+            <a className="text-lg text-decoration-none">{title}</a>
+          </Link>
+        )}
       </p>
     </div>
   );
@@ -26,6 +32,7 @@ const MenuItem = (props) => {
 MenuItem.defaultProps = {
   href: "/",
   active: false,
+  onClick: false,
 };
 
 MenuItem.propTypes = {
@@ -41,6 +48,7 @@ MenuItem.propTypes = {
   ]).isRequired,
   href: propTypes.string,
   active: propTypes.bool,
+  onClick: propTypes.oneOfType([propTypes.bool, propTypes.func]),
 };
 
 export default MenuItem;

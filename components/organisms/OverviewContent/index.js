@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { toast } from "react-toastify";
-import { getMemberOverview } from "../../../services/player";
+import { getMemberOverview } from "../../../services/member";
 import Category from "./Category";
 import TableRow from "./TableRow";
 

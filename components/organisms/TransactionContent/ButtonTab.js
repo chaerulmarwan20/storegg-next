@@ -2,7 +2,7 @@ import cx from "classnames";
 import propTypes from "prop-types";
 
 const ButtonTab = (props) => {
-  const { title, data, href, active } = props;
+  const { title, active, onClick } = props;
   const classBtn = cx({
     btn: true,
     "btn-status": true,
@@ -13,23 +13,16 @@ const ButtonTab = (props) => {
   });
 
   return (
-    <a data-filter={data} href={href} className={classBtn}>
+    <button type="button" className={classBtn} onClick={onClick}>
       {title}
-    </a>
+    </button>
   );
-};
-
-ButtonTab.defaultProps = {
-  data: "*",
-  href: "/",
-  active: false,
 };
 
 ButtonTab.propTypes = {
   title: propTypes.string.isRequired,
-  data: propTypes.oneOf(["success", "pending", "failed"]),
-  href: propTypes.string,
-  active: propTypes.bool,
+  active: propTypes.bool.isRequired,
+  onClick: propTypes.func.isRequired,
 };
 
 export default ButtonTab;

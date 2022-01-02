@@ -96,6 +96,7 @@ const TransactionContent = () => {
                   return (
                     <TableRow
                       key={transaction._id}
+                      id={transaction._id}
                       image={`${urlImg}/${transaction.historyVoucherTopup.thumbnail}`}
                       title={transaction.historyVoucherTopup.gameName}
                       category={transaction.historyVoucherTopup.category}

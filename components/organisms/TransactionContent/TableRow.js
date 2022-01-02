@@ -4,7 +4,7 @@ import cx from "classnames";
 import propTypes from "prop-types";
 
 const TableRow = (props) => {
-  const { image, title, category, item, price, status } = props;
+  const { id, image, title, category, item, price, status } = props;
   const classStatus = cx({
     "float-start": true,
     "icon-status": true,
@@ -55,7 +55,7 @@ const TableRow = (props) => {
         </div>
       </td>
       <td>
-        <Link href="/member/transactions/detail">
+        <Link href={`/member/transactions/${id}`}>
           <a className="btn btn-status rounded-pill text-sm">Details</a>
         </Link>
       </td>
@@ -64,6 +64,7 @@ const TableRow = (props) => {
 };
 
 TableRow.propTypes = {
+  id: propTypes.string.isRequired,
   image: propTypes.string.isRequired,
   title: propTypes.string.isRequired,
   category: propTypes.string.isRequired,

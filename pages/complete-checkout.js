@@ -24,8 +24,8 @@ const CompleteCheckout = () => {
             </a>
           </Link>
           <a
-            className="btn btn-whatsapp fw-medium text-lg color-palette-1 rounded-pill"
             href="https://wa.me/6281224685502?text=Saya%20sudah%20melakukan%20pembayaran"
+            className="btn btn-whatsapp fw-medium text-lg color-palette-1 rounded-pill"
             role="button"
           >
             WhatsApp ke Admin

@@ -23,3 +23,12 @@ export const getMemberTransactions = (value) => {
     token: true,
   });
 };
+
+export const getTransactionDetail = (id, token) => {
+  const url = `${api}/${version}/players/history/${id}/detail`;
+  return callApi({
+    url,
+    method: "GET",
+    serverToken: token,
+  });
+};

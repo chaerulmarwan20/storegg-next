@@ -13,7 +13,7 @@ const Transactions = () => {
 
 export default Transactions;
 
-export async function getServerSideProps({ req }) {
+export function getServerSideProps({ req }) {
   const { token } = req.cookies;
   if (!token) {
     return {

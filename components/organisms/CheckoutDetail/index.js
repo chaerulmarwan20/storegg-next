@@ -46,9 +46,6 @@ const CheckoutDetail = () => {
           <span className="purchase-details">{dataTopUp.verifyId}</span>
         </p>
         <p className="text-lg color-palette-1 mb-20">
-          Order ID <span className="purchase-details">#GG001</span>
-        </p>
-        <p className="text-lg color-palette-1 mb-20">
           Item{" "}
           <span className="purchase-details">
             {dataTopUp.nominalItem.coinQuantity}{" "}

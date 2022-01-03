@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useEffect } from "react";
 import AOS from "aos";
 import Navbar from "../components/organisms/Navbar";
@@ -13,6 +14,23 @@ const Home = () => {
 
   return (
     <>
+      <Head>
+        <title>StoreGG - Topup & Get a New Experience in Gaming</title>
+        <meta
+          name="description"
+          content="Kami menyediakan jutaan cara untuk membantu players menjadi pemenang sejati"
+        />
+        <meta
+          property="og:title"
+          content="StoreGG - Topup & Get a New Experience in Gaming"
+        />
+        <meta
+          property="og:description"
+          content="Kami menyediakan jutaan cara untuk membantu players menjadi pemenang sejati"
+        />
+        <meta property="og:image" content="https://imageurlhere" />
+        <meta property="og:url" content="https://storegg.com" />
+      </Head>
       <Navbar />
       <MainBanner />
       <TransactionStep />

@@ -1,38 +1,16 @@
-import { useRouter } from "next/router";
-import { useState, useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import Navbar from "../../components/organisms/Navbar";
 import TopUpItem from "../../components/organisms/TopUpItem";
 import TopUpForm from "../../components/organisms/TopUpForm";
 import Footer from "../../components/organisms/Footer";
-import { getDetailVoucher } from "../../services/player";
+import { getDetailVoucher, getFeaturedGame } from "../../services/player";
 
-const Detail = () => {
-  const { query, isReady } = useRouter();
-
-  const [dataItem, setDataItem] = useState({
-    name: "",
-    thumbnail: "",
-    category: {
-      name: "",
-    },
-  });
-  const [nominals, setNominals] = useState([]);
-  const [payments, setPayments] = useState([]);
-
-  const getVoucherDetail = useCallback(
-    async (id) => {
-      const data = await getDetailVoucher(id);
-      setDataItem(data.detail);
-      localStorage.setItem("data-item", JSON.stringify(data.detail));
-      setNominals(data.detail.nominals);
-      setPayments(data.payment);
-    },
-    [getDetailVoucher]
-  );
+const Detail = (props) => {
+  const { dataItem, nominals, payments } = props;
 
   useEffect(() => {
-    if (isReady) getVoucherDetail(query.id);
-  }, [isReady]);
+    localStorage.setItem("data-item", JSON.stringify(dataItem));
+  }, []);
 
   return (
     <>
@@ -65,3 +43,30 @@ const Detail = () => {
 };
 
 export default Detail;
+
+export async function getStaticPaths() {
+  const data = await getFeaturedGame();
+  const paths = data.map((item) => {
+    return {
+      params: {
+        id: item._id,
+      },
+    };
+  });
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const { id } = params;
+  const data = await getDetailVoucher(id);
+  return {
+    props: {
+      dataItem: data.detail,
+      nominals: data.detail.nominals,
+      payments: data.payment,
+    },
+  };
+}

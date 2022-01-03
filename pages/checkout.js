@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import jwtDecode from "jwt-decode";
 import CheckoutItem from "../components/organisms/CheckoutItem";
 import CheckoutDetail from "../components/organisms/CheckoutDetail";
 import CheckoutConfirmation from "../components/organisms/CheckoutConfirmation";
@@ -43,13 +42,7 @@ export function getServerSideProps({ req }) {
       },
     };
   }
-  const jwtToken = Buffer.from(token, "base64").toString("ascii");
-  const payload = jwtDecode(jwtToken);
-  const { player } = payload;
-  player.avatar = player.avatar ? player.avatar : "/img/default.png";
   return {
-    props: {
-      user: player,
-    },
+    props: {},
   };
 }

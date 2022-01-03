@@ -1,4 +1,3 @@
-import jwtDecode from "jwt-decode";
 import TransactionDetailContent from "../../../components/organisms/TransactionDetailContent";
 import { getTransactionDetail } from "../../../services/member";
 
@@ -26,9 +25,6 @@ export async function getServerSideProps({ req, params }) {
     };
   }
   const jwtToken = Buffer.from(token, "base64").toString("ascii");
-  const payload = jwtDecode(jwtToken);
-  const { player } = payload;
-  player.avatar = player.avatar ? player.avatar : "/img/default.png";
   const response = await getTransactionDetail(idTrc, jwtToken);
   return {
     props: {

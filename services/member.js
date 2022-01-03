@@ -32,3 +32,13 @@ export const getTransactionDetail = (id, token) => {
     serverToken: token,
   });
 };
+
+export const updateProfile = (data, id) => {
+  const url = `${api}/${version}/players/profile/${id}`;
+  return callApi({
+    url,
+    method: "PUT",
+    data,
+    token: true,
+  });
+};
